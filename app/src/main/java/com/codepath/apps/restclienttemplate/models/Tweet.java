@@ -20,8 +20,6 @@ public class Tweet {
 
     }
 
-    public void add(Tweet tweet) {
-    }
 
 
 

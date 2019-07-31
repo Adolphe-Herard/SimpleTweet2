@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -33,6 +34,7 @@ public class TimelineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
+        //Toast.makeText(this, "Timeline", Toast.LENGTH_SHORT).show();
         client = TwitterApp.getRestClient(this);
         swipeContainer = findViewById(R.id.swipeContainer);
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -53,9 +55,8 @@ public class TimelineActivity extends AppCompatActivity {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.d("TwitterClient","contain is being refresh");
+                Toast.makeText(TimelineActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
                 populateHomeTimeLine();
-
             }
         });
     }
@@ -71,12 +72,8 @@ public class TimelineActivity extends AppCompatActivity {
                 for (int i = 0; i< response.length(); i++){
                     try {
                         JSONObject jsonTweetObject = response.getJSONObject(i);
-                        response.getJSONObject(i);
                      Tweet tweets = Tweet.fromJson(jsonTweetObject);
                      tweetsToAdd.add(tweets);
-                     tweet.add(tweets);
-
-                        Adapter.notifyItemInserted(tweet.size()-1);
                     } catch (JSONException e) {
                         e.printStackTrace();
 
@@ -89,12 +86,12 @@ public class TimelineActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e("TwitterClient",responseString);
+                Toast.makeText(TimelineActivity.this, "Failure", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Log.e("TwitterClient",errorResponse.toString());
+                Toast.makeText(TimelineActivity.this, "Failure again", Toast.LENGTH_SHORT).show();
             }
         });
     }

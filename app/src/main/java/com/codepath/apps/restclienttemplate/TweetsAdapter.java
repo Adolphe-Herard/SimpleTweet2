@@ -19,7 +19,7 @@ public class TweetsAdapter  extends RecyclerView.Adapter <TweetsAdapter.ViewHold
 
     private Context context;
     private List<Tweet> tweets;
-    private Object ViewParent;
+
 
 
     // Pass in context list of tweets
@@ -33,9 +33,8 @@ public class TweetsAdapter  extends RecyclerView.Adapter <TweetsAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
     {
-       View view = LayoutInflater.from(context).inflate(R.layout.item_tweet, (ViewGroup) ViewParent,false);
-
-        return null;
+       View view = LayoutInflater.from(context).inflate(R.layout.item_tweet, viewGroup,false);
+        return new ViewHolder(view);
     }
     //bind values based on the position of the element
 

@@ -3,30 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:paddingTop="5dp">
 
     <ImageView
         android:id="@+id/ivProfileImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:paddingTop="2dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvSreenName"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="9dp"
         android:layout_toRightOf="@id/ivProfileImage"
-        android:text="Herard 1234" />
+        android:text="Herard 1234"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ivProfileImage"
+        android:layout_below="@id/tvSreenName"
         android:layout_marginLeft="7dp"
-        android:layout_marginTop="-27dp"
         android:layout_toRightOf="@id/ivProfileImage"
-        android:text="This is my tweet" />
+        android:text="This is my tweet"
+        android:textSize="12sp" />
 </RelativeLayout>

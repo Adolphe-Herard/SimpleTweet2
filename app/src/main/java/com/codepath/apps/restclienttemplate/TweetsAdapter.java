@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -41,9 +45,7 @@ public class TweetsAdapter  extends RecyclerView.Adapter <TweetsAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Tweet tweet = tweets.get(i);
-        viewHolder.tvBody.setText(tweet.body);
-        viewHolder.tvSreenName.setText(tweet.user.SreenName);
-        Glide.with(context).load(tweet.user.profilImageUrl).into(viewHolder.ivProfileImage);
+        viewHolder.bind(tweet);
 
 
     }
@@ -76,12 +78,29 @@ public class TweetsAdapter  extends RecyclerView.Adapter <TweetsAdapter.ViewHold
             public ImageView ivProfileImage;
             public TextView tvSreenName;
             public TextView tvBody;
+            public RelativeLayout relativeLayout;
 
             public ViewHolder(View itemView) {
             super(itemView);
             ivProfileImage= itemView.findViewById(R.id.ivProfileImage);
             tvSreenName = itemView.findViewById(R.id.tvSreenName);
             tvBody = itemView.findViewById(R.id.tvBody);
+            relativeLayout =itemView.findViewById(R.id.relative);
+        }
+
+        public void bind(final Tweet tweet) {
+                tvBody.setText(tweet.body);
+            tvSreenName.setText(tweet.user.SreenName);
+            Glide.with(context).load(tweet.user.profilImageUrl).into(ivProfileImage);
+            relativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context,DetailTweet.class);
+                    intent.putExtra("t", Parcels.wrap(tweet));
+                    context.startActivity(intent);
+                }
+            });
+
         }
     }
 }
